@@ -2,7 +2,7 @@ const Joi = require("joi");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
-const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
 const authController = {
     async register(req, res, next) {
