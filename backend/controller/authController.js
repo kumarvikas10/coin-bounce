@@ -54,7 +54,7 @@ const authController = {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // 5. store user data in db
-        const userToRegister = new User ({
+        const userToRegister = new user ({
             username,
             email,
             name,
