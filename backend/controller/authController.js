@@ -98,7 +98,7 @@ const authController = {
         }
 
         //match Passowrd
-        const match = await bycryt.compare(password, user.password);
+        const match = await bcrypt.compare(password, user.password);
 
         if(!match){
           const error = {
