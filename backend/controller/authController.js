@@ -65,7 +65,8 @@ const authController = {
         const user = await userToRegister.save();
 
         //6. response send
-        return res.status(201).json({user})
+        const userDto = new userDTO(user);
+        return res.status(201).json({user: userDto})
     },
     async login(req,res,next) {
       // 1. Validate user input
