@@ -1,6 +1,7 @@
 const Joi = require("joi");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const userDTO = require("../dto/user");
 
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -111,7 +112,8 @@ const authController = {
       }catch(error){
         return next(error);
       }
-      return res.status(200).json({user});
+      const userDto = new userDTO(user);
+      return res.status(200).json({user: userDto});
     },
 }
 
