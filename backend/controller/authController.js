@@ -2,7 +2,7 @@ const Joi = require("joi");
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const userDTO = require("../dto/user");
-const JWTService = require('../services/JWTService')
+const JWTService = require("../services/JWTService");
 
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -71,7 +71,7 @@ const authController = {
         //token generation
         acessToken = JWTService.signAcessToken({_id: user._id, username: user.email}, '30m'); //jwt method
 
-        refreshToken = JWTService.signAcessToken({_id: user._id}, '60m');
+        refreshToken = JWTService.signRefreshToken({_id: user._id}, '60m');
 
         //token generation
         }catch(error){
@@ -83,12 +83,12 @@ const authController = {
 
         //Send tokens in cookies
         res.cookie('accessToken', acessToken, {
-          maxAge: 1000 * 60 * 60 * 24, //cookie expiry time
+          maxAge: 1000 * 60 * 60 * 24, //cookie expiry time 24 hr
           httpOnly: true 
         })
 
         res.cookie('refreshToken', refreshToken, {
-          maxAge: 1000 * 60 * 60 * 24, //cookie expiry time
+          maxAge: 1000 * 60 * 60 * 24, //cookie expiry time 24 hr
           httpOnly: true 
         })
 

@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {ACCESS_TOKEN_SECRET} = require('../config/index');
-const {REFRESH_TOKEN_SECRET} = require('../config/index');
+const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = require('../config/index');
 const RefreshToken = require('../models/token');
 
 class JWTService{
@@ -21,14 +20,14 @@ class JWTService{
         return jwt.verify(token, REFRESH_TOKEN_SECRET); //jwn sign method
     }
     //store refresh token
-    async storeRefreshToken(token){
+    static async storeRefreshToken(token){
         try{
             const newToken = new RefreshToken ({
                 token: token,
                 userId: userId
             });
             await newToken.save(); //store in db
-        }catch(errror){
+        }catch(error){
             console.log(error);
         }
     }
