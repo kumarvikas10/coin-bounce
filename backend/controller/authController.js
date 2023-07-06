@@ -3,6 +3,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const userDTO = require("../dto/user");
 const JWTService = require("../services/JWTService");
+const RefreshToken = require('../models/token');
 
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
@@ -79,10 +80,10 @@ const authController = {
         }
 
         //Store refresh token in db
-        JWTService.storeRefreshToken(refreshToken, user._id)
+       await JWTService.storeRefreshToken(refreshToken, user._id)
 
         //Send tokens in cookies
-        res.cookie('accessToken', acessToken, {
+        res.cookie('acessToken', acessToken, {
           maxAge: 1000 * 60 * 60 * 24, //cookie expiry time 24 hr
           httpOnly: true 
         })
@@ -141,7 +142,35 @@ const authController = {
       }catch(error){
         return next(error);
       }
+      const acessToken = JWTService.signAcessToken({_id: user._id}, '30m');
+      const refreshToken = JWTService.signRefreshToken({_id: user._id}, '60m');
+
+      //update refresh token in database
+      try{
+        await RefreshToken .updateOne({
+          _id: user._id
+        },
+        {token: refreshToken},
+        {upsert: true}
+        )
+      }catch(error){
+        return next(error);
+      }
+      
+
+      //Send tokens in cookies
+      res.cookie('acessToken', acessToken, {
+        maxAge: 1000 * 60 * 60 * 24, //cookie expiry time 24 hr
+        httpOnly: true 
+      })
+
+      res.cookie('refreshToken', refreshToken, {
+        maxAge: 1000 * 60 * 60 * 24, //cookie expiry time 24 hr
+        httpOnly: true 
+      })
+
       const userDto = new userDTO(user);
+
       return res.status(200).json({user: userDto});
     },
 }
