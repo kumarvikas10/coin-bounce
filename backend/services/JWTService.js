@@ -20,7 +20,7 @@ class JWTService{
         return jwt.verify(token, REFRESH_TOKEN_SECRET); //jwn sign method
     }
     //store refresh token
-    static async storeRefreshToken(token){
+    static async storeRefreshToken(token, userId){
         try{
             const newToken = new RefreshToken ({
                 token: token,
