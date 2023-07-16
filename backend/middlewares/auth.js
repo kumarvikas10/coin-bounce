@@ -7,7 +7,7 @@ const auth = async(req,res,next) => {
          //1. refresh, access token validation
     const {refreshToken, acessToken} = req.cookies;
 
-    if(refreshToken || acessToken) {
+    if(!refreshToken || !acessToken) {
         const error = {
             status: 401,
             message: 'Unauthorized'
@@ -21,10 +21,10 @@ const auth = async(req,res,next) => {
     }catch(error){
         return next(error);
     }
-    let user;
 
+    let user;
     try{
-        user = await user.findOne({_id: _id});
+        user = await User.findOne({_id: _id});
     } catch(error){
         return next(error);
     }
