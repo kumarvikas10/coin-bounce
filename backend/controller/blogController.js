@@ -61,11 +61,12 @@ const blogController = {
 
         return res.status(201).json({blog: blogDto});
     },
+
     async getAll(req,res,next){
         try{
-            const blogs = await Blog.findOne({});
+            const blogs = await Blog.find({});
             const blogsDto = [];
-            for(let i=0; i<blogs.length; i++){
+            for(let i=0; i < blogs.length; i++){
                 const dto = new BlogDTO(blogs[i]);
                 blogsDto.push(dto);
             }

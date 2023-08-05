@@ -15,9 +15,7 @@ app.use(router);
 
 dbConnect();
 
-app.get('/', (req,res)=>{
-    res.json({msg: '\hello-world'})
-})
+app.use('/storage',express.static('storage'));
 
 app.use(errorHandler); //Always Register at the end of the app
 
