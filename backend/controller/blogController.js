@@ -37,7 +37,7 @@ const blogController = {
 
         // save locally
         try{
-            fs.writeFileSync(`storage/${imagePath}`, bufffer);
+            fs.writeFileSync(`storage/${imagePath}`, buffer);
         }catch(error){
             return next(error);
         }
