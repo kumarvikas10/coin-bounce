@@ -4,6 +4,7 @@ const mongodbIdPattern = /^[0-9a-fA-F]{24}$/;
 const Blog = require('../models/blog');
 const {BACKEND_SERVER_PATH} = require('../config/index');
 const BlogDTO = require('../dto/blog');
+const BlogDetailsDTO = require('../dto/blog-details');
 
 const blogController = {
     async create(req,res,next){
@@ -76,7 +77,33 @@ const blogController = {
             return next(error);
         }
     },
-    async getById(req,res,next){},
+    async getById(req,res,next){
+        //validate id 
+        //response
+        const getByIdSchema = joi.object({
+            id: Joi.string().regex.apply(mongodbIdPattern).required()
+        });
+
+        const {error} = getByIdSchema.validate(req.params);
+
+        if(error){
+            return next(error);
+        }
+
+        let blog;
+
+        const {id} = req.params;
+
+        try{
+            blog = await Blog.findOne({_id: id}).populate('author');
+        }
+        catch(eror){
+            return next(error);
+        }
+
+        const blogDto = new BlogDetailsDTO(blog);
+        return res.status(200).json({blog: blogDto});
+    },
     async update(req,res,next){},
     async delete(req,res,next){}
 }
