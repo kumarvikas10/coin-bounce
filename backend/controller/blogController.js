@@ -80,8 +80,8 @@ const blogController = {
     async getById(req,res,next){
         //validate id 
         //response
-        const getByIdSchema = joi.object({
-            id: Joi.string().regex.apply(mongodbIdPattern).required()
+        const getByIdSchema = Joi.object({
+            id: Joi.string().regex(mongodbIdPattern).required()
         });
 
         const {error} = getByIdSchema.validate(req.params);
@@ -89,9 +89,7 @@ const blogController = {
         if(error){
             return next(error);
         }
-
         let blog;
-
         const {id} = req.params;
 
         try{
