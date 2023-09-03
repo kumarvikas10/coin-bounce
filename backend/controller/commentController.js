@@ -30,7 +30,27 @@ const commentController={
         return res.status(201).json({message: "Comment Created"});
     },
     async getById(req,res,next){
+        const getByIdSchema = Joi.object({
+            id: Joi.string().regex(mongodbIdPattern).required()
+        })
 
+        const {error} = getByIdSchema.validate(req.params)
+
+        if(error){
+            return next(error);
+        }
+
+        const {id} = req.params;
+
+        let comments;
+
+        try{
+            comments = await Comment.find({blog: id});
+        }catch(error){
+            return next(error);
+        }
+
+        return res.status(200).json({data: comments});
     }
 }
 
