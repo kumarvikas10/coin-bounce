@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const mongodbIdPattern = /^[0-9a-fA-F]{24}$/;
-const Comment = require('../models/comment') 
+const Comment = require('../models/comment');
+const CommentDTO = require('../dto/comment'); 
 
 const commentController={
     async create(req,res,next){
@@ -29,6 +30,7 @@ const commentController={
 
         return res.status(201).json({message: "Comment Created"});
     },
+
     async getById(req,res,next){
         const getByIdSchema = Joi.object({
             id: Joi.string().regex(mongodbIdPattern).required()
@@ -45,12 +47,17 @@ const commentController={
         let comments;
 
         try{
-            comments = await Comment.find({blog: id});
+            comments = await Comment.find({blog: id}).populate('author');
         }catch(error){
             return next(error);
         }
-
-        return res.status(200).json({data: comments});
+        
+        let commentsDTO = [];
+        for(let i=0; i<comments.length; i++){
+            const obj = new CommentDTO(comments[i]);
+            commentsDTO.push(obj);
+        }
+        return res.status(200).json({data: commentsDTO});
     }
 }
 
