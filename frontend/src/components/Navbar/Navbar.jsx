@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
 function Navbar() {
+  const isAuthenticated = false;
   return (
     <>
       <nav className={styles.navbar}>
@@ -40,7 +41,7 @@ function Navbar() {
         >
           Submit a Blog
         </NavLink>
-        <NavLink
+        { isAuthenticated ? <div><NavLink><button className={styles.signoutButton}>Sign Out</button></NavLink></div> : <div><NavLink
           to="log-in"
           className={({ isActive }) =>
             isActive ? styles.activeStyle : styles.inActiveStyle
@@ -55,7 +56,7 @@ function Navbar() {
           }
         >
           <button className={styles.signupButton}>Sign Up</button>
-        </NavLink>
+        </NavLink></div>}
       </nav>
       <div></div>
     </>
