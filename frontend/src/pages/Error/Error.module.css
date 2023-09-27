@@ -5,3 +5,20 @@
     justify-content: center;
     min-height: 60vh;
 }
+
+.errorHeader{
+    color: #ea3943;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.errorBody{
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.homeLink{
+    text-decoration: none;
+    font-weight: 600;
+    color: #38fbe1;
+}

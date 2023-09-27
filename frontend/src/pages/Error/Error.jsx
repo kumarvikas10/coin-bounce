@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 function Error(){
     return (
         <div className={styles.errorWrapper}>
-            <div>Error 404 - Page not found</div>
-            <div>Go Back to <Link to="/">Home</Link></div>
+            <div className={styles.errorHeader}>Error 404 - Page not found</div>
+            <div className={styles.errorBody}>Go Back to <Link to="/" className={styles.homeLink}>Home</Link></div>
         </div>
     )
 }
