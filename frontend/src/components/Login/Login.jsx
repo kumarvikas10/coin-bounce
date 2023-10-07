@@ -19,7 +19,7 @@ function Login(){
             <TextInput type="text" value={values.username} name="username" onBlur={handleBlur} onChange={handleChange} placeholder="username" error={errors.username && touched.username ? 1: undefined}  errormessage = {errors.username}/>
             <TextInput type="password" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange} placeholder="password" error={errors.password && touched.password ? 1: undefined} errormessage = {errors.password} />
             <button className={styles.loginButton}>Log In</button>
-            <span>Don't have an account <button className={styles.createAccount}>Register</button></span>
+            <span>Don't have an account ? <button className={styles.createAccount}>Register</button></span>
         </div>
     )
 }
