@@ -2,8 +2,42 @@ import styles from './Login.module.css';
 import TextInput from '../TextInput/TextInput';
 import loginSchema from '../../schemas/loginSchema';
 import {useFormik} from 'formik';
+import { login } from '../../api/internal';
+import {setUser} from '../../store/userSlice';
+import {useDispatch} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function Login(){
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [error, setError] = useState('');
+
+    const handleLogin = async () => {
+        const data = {
+            username: values.username,
+            password: values.password
+        }
+        const response = await login(data);
+        if(response.status === 200){
+            //1. set user
+            const user = {
+                _id: response.data.user._id,
+                email: response.data.user.email,
+                username: response.data.user.username,
+                auth: response.data.user.auth,
+            }
+
+            dispatch(setUser(user));
+            navigate('/')
+            //2. redirect -> homepage
+        }
+        else if(response.code === 'ERR_BAD_REQUEST'){
+            setError(response.response.data.errormessage)
+            //display error message
+        }
+    }
+
     const {values, touched, handleBlur, handleChange, errors} = useFormik({
         initialValues:{
             username: '',
@@ -18,8 +52,8 @@ function Login(){
             </div>
             <TextInput type="text" value={values.username} name="username" onBlur={handleBlur} onChange={handleChange} placeholder="username" error={errors.username && touched.username ? 1: undefined}  errormessage = {errors.username}/>
             <TextInput type="password" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange} placeholder="password" error={errors.password && touched.password ? 1: undefined} errormessage = {errors.password} />
-            <button className={styles.loginButton}>Log In</button>
-            <span>Don't have an account ? <button className={styles.createAccount}>Register</button></span>
+            <button className={styles.loginButton} onClick={handleLogin}>Log In</button>
+            <span>Don't have an account ? <button className={styles.createAccount} onClick={() => navigate('/signup')}>Register</button></span>
         </div>
     )
 }
