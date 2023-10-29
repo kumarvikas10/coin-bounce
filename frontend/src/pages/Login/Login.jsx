@@ -1,5 +1,5 @@
 import styles from './Login.module.css';
-import TextInput from '../TextInput/TextInput';
+import TextInput from '../../components/TextInput/TextInput';
 import loginSchema from '../../schemas/loginSchema';
 import {useFormik} from 'formik';
 import { login } from '../../api/internal';
@@ -25,7 +25,7 @@ function Login(){
                 _id: response.data.user._id,
                 email: response.data.user.email,
                 username: response.data.user.username,
-                auth: response.data.user.auth,
+                auth: response.data.auth,
             }
 
             dispatch(setUser(user));
@@ -54,6 +54,7 @@ function Login(){
             <TextInput type="password" name="password" value={values.password} onBlur={handleBlur} onChange={handleChange} placeholder="password" error={errors.password && touched.password ? 1: undefined} errormessage = {errors.password} />
             <button className={styles.loginButton} onClick={handleLogin}>Log In</button>
             <span>Don't have an account ? <button className={styles.createAccount} onClick={() => navigate('/signup')}>Register</button></span>
+            {error !== "" ? <p className={styles.errorMessage}>{error}</p>  : ""}
         </div>
     )
 }
