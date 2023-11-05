@@ -18,8 +18,8 @@
 }
 
 .loginButton{
-    border-color: #fff;
-    color: #fff;
+    color: #222;
+    background-color: #38fbe1;
     outline: none;
     width: 30%;
     border-radius: 10px;
@@ -34,7 +34,7 @@
 .createAccount{
     margin-top: 50px;
     margin-left: 10px;
-    color: #16C784;
+    color: #38fbe1;
     font-size: 18px;
     cursor: pointer;
     border:none;

@@ -6,6 +6,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import styles from './App.module.css';
 import Protected from './components/Protected/Protected';
 import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Route path="blogs" exact element={<Protected isAuth={isAuth}><div className={styles.main}>Blogs Page</div></Protected>} />
           <Route path="submit" exact element={<Protected isAuth={isAuth}><div className={styles.main}>Submit Blog</div></Protected>} />
           <Route path="login" exact element={<div className={styles.main}><Login/></div>} />
-          <Route path="signup" exact element={<div className={styles.main}>Sign Up</div>} />
+          <Route path="signup" exact element={<div className={styles.main}><Signup /></div>} />
           <Route path="*" element={<div className={styles.main}><Error /></div>} />
         </Routes>
         <Footer />
