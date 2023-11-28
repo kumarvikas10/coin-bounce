@@ -1,6 +1,5 @@
 import styles from "./Signup.module.css";
 import TextInput from "../../components/TextInput/TextInput";
-import singupSchema from "../../schemas/singupSchema";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -62,7 +61,7 @@ function Signup() {
         onBlur={handleBlur}
         placeholder="name"
         error={error.name && touched.name ? 1 : undefined}
-        errorMessage={errors.name}
+        // errorMessage={errors.name}
       />
       <TextInput
         type="text"
