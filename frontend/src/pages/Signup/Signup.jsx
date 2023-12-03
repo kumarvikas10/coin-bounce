@@ -1,6 +1,5 @@
 import styles from "./Signup.module.css";
 import TextInput from "../../components/TextInput/TextInput";
-import singupSchema from "../../schemas/singupSchema";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -61,8 +60,8 @@ function Signup() {
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="name"
-        error={error.name && touched.name ? 1 : undefined}
-        errorMessage={errors.name}
+        error={errors.name && touched.name ? 1 : undefined}
+        errormessage={errors.name}
       />
       <TextInput
         type="text"
@@ -71,8 +70,8 @@ function Signup() {
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="username"
-        error={error.username && touched.username ? 1 : undefined}
-        errorMessage={errors.username}
+        error={errors.username && touched.username ? 1 : undefined}
+        errormessage={errors.username}
       />
       <TextInput
         type="email"
@@ -81,8 +80,8 @@ function Signup() {
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="email"
-        error={error.email && touched.email ? 1 : undefined}
-        errorMessage={errors.email}
+        error={errors.email && touched.email ? 1 : undefined}
+        errormessage={errors.email}
       />
       <TextInput
         type="password"
@@ -91,8 +90,8 @@ function Signup() {
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="password"
-        error={error.password && touched.password ? 1 : undefined}
-        errorMessage={errors.password}
+        error={errors.password && touched.password ? 1 : undefined}
+        errormessage={errors.password}
       />
       <TextInput
         type="password"
@@ -101,8 +100,8 @@ function Signup() {
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder="confirmPassword"
-        error={error.confirmPassword && touched.confirmPassword ? 1 : undefined}
-        errorMessage={errors.confirmPassword}
+        error={errors.confirmPassword && touched.confirmPassword ? 1 : undefined}
+        errormessage={errors.confirmPassword}
       />
       <button className={styles.signupButton} onClick={handleSignup}>
         Sign Up
