@@ -33,7 +33,7 @@ function Login(){
             //2. redirect -> homepage
         }
         else if(response.code === 'ERR_BAD_REQUEST'){
-            setError(response.response.data.errormessage)
+            setError(response.response.data.message)
             //display error message
         }
     }

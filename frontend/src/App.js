@@ -8,7 +8,7 @@ import Protected from './components/Protected/Protected';
 import Login from './pages/Login/Login';
 import Signup from './pages/Signup/Signup';
 import { useSelector } from 'react-redux';
-
+ 
 function App() {
   const isAuth = useSelector((state) => state.user.auth);
   return (
