@@ -19,7 +19,7 @@
 
 .signupButton{
     color: #222;
-    background-color: #38fbe1;
+    background-color: #b538fb;
     outline: none;
     width: 30%;
     border-radius: 10px;
@@ -31,17 +31,21 @@
     margin-top: 20px;
 }
 
+.signupButton:disabled{
+    background-color: #969696;
+}
+
 .login{
     margin-top: 20px;
     margin-left: 10px;
-    color: #38fbe1;
+    color: #b538fb;
     font-size: 18px;
     cursor: pointer;
     border:none;
 }
 
 .errorMessage{
-    color: #38fbe1;
+    color: #b538fb;
     margin: 20px 0;
     font-size: 18px;
     font-weight: 600;

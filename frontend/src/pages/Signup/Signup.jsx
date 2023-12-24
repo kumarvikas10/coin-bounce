@@ -35,7 +35,7 @@ function Signup() {
       //redirect homepage
       navigate("/");
     } else if (response.code === "ERR_BAD_REQUEST") {
-      setError(response.response.data.errormessage);
+      setError(response.response.data.message);
       //display error message
     }
   };
@@ -103,7 +103,7 @@ function Signup() {
         error={errors.confirmPassword && touched.confirmPassword ? 1 : undefined}
         errormessage={errors.confirmPassword}
       />
-      <button className={styles.signupButton} onClick={handleSignup}>
+      <button className={styles.signupButton} onClick={handleSignup} disabled={ !values.username || !values.password || !values.name || !values.confirmPassword || !values.email || errors.username || errors.password || errors.confirmPassword || errors.name || errors.email}>
         Sign Up
       </button>
       <span>
