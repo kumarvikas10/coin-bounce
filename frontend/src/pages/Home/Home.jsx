@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { getNews } from "../../api/external";
 import styles from '../Home/Home.module.css';
+import Loader from "../../components/Loader/Loader";
 
 function Home(){
     const [articles, setArticles] = useState([]);
+
     useEffect(()=>{
         //IIFE
         (async function newsApiCall(){
@@ -17,6 +19,17 @@ function Home(){
         setArticles([]);
     },[]);
 
+    const handleCardClick = (url) => {
+        window.open(url, "_blank");
+
+    }
+
+    if (articles.length === 0){
+        return (
+            <Loader  text="homepage" />
+        )
+    }
+
     return(
         <>
         <div className={styles.header}>
@@ -25,7 +38,7 @@ function Home(){
         <div className={styles.grid}>
             {
                 articles.map((article) => (
-                    <div className={styles.card}>
+                    <div className={styles.card} key={article.url} onClick={() =>handleCardClick(article.url)}>
                         <img src={article.urlToImage} alt="bitcoin_1"/>
                         <h3>{article.title}</h3>
                     </div>
