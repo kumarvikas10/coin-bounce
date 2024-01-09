@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import styles from './Cryto.module.css';
 import Loader from "../../components/Loader/Loader";
 import { getCrypto } from "../../api/external";
+import styles from './Crypto.module.css';
 
 function Crypto (){
     const [data, setData] = useState([]);
@@ -10,12 +10,13 @@ function Crypto (){
         (async function getCryptoApiCall(){
             const response = await getCrypto();
             setData(response);
-        })
+        })();
+
         //Cleanup
         setData([]);
     }, []);
 
-    if (data.length === 0){
+    if(data.length == 0){
         return <Loader text="cryptocurrencies" />
     }
 
@@ -30,6 +31,23 @@ function Crypto (){
                     <th>24h</th>
                 </tr>
             </thead>
+            <tbody>
+                {data.map((coin)=>(
+                    <tr id={coin.id} className={styles.tableRow}>
+                        <td>{coin.market_cap_rank}</td>
+                        <td>
+                            <div className={styles.logo}>
+                                <img src={coin.image} width={40} height={40} alt="coin-logo" /> {coin.name}
+                            </div>
+                        </td>
+                        <td>
+                            <div className={styles.symbol}>{coin.symbol}</div>
+                        </td>
+                        <td>{coin.current_price}</td>
+                        <td>{coin.price_change_percentage_24h}</td>
+                    </tr>
+                ))}
+            </tbody>
         </table>
     )
 }
