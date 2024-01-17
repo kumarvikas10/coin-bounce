@@ -45,7 +45,7 @@ export const getAllBlogs = async() => {
     let response;
 
     try{
-        response = await api.post('/blog/all');
+        response = await api.get('/blog/all');
     }catch(error){
         return error;
     }
