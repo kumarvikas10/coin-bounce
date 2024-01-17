@@ -16,8 +16,16 @@ function Crypto (){
         setData([]);
     }, []);
 
-    if(data.length == 0){
+    if(data.length === 0){
         return <Loader text="cryptocurrencies" />
+    }
+
+    const negativeStyle = {
+        color: "#ea3943"
+    }
+
+    const positiveStyle = {
+        color: "#16c784"
     }
 
     return(
@@ -44,7 +52,8 @@ function Crypto (){
                             <div className={styles.symbol}>{coin.symbol}</div>
                         </td>
                         <td>{coin.current_price}</td>
-                        <td>{coin.price_change_percentage_24h}</td>
+                        <td style={ coin.price_change_percentage_24h < 0 ? negativeStyle : positiveStyle }
+                        >{coin.price_change_percentage_24h}</td>
                     </tr>
                 ))}
             </tbody>
