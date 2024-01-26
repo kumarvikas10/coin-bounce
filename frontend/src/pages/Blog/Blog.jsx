@@ -26,7 +26,7 @@ function Blog (){
         <div className={styles.blogsWrapper}>
             {blogs.map((blog) =>(
                 <div id={blog._id} className={styles.blog}>
-                    <h2>{blog.title}</h2>
+                    <h1>{blog.title}</h1>
                     <img src={blog.photo} />
                     <p>{blog.content}</p>
                 </div>

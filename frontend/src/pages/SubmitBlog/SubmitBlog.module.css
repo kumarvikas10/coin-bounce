@@ -1,0 +1,56 @@
+.wrapper {
+    margin: 0 auto;
+    width: 80vw;
+    height: calc(100vh-200px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    font-size: 24px;
+    font-weight: inherit;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.content {
+    padding: 18px 10px;
+    margin: 15px;
+    width: 60%;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    font-size: 20px;
+    min-height: 200px;
+}
+
+.photoPromt {
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    gap: 60px;
+    width: 60%;
+    align-items: center;
+    margin: 10px;
+}
+
+.submit {
+    background-color: #b538fb;
+    color: #fff;
+    border: none;
+    outline: none;
+    width: 30%;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.submit:hover,
+.submit:disabled {
+    background-color: #eac6ff;
+}
